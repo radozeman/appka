@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Link from "next/link";
 
 export function RegisterForm({
   className,
@@ -45,6 +46,12 @@ export function RegisterForm({
               <Button type="submit" className="w-full mb-2">
                 Zaregistrovať sa
               </Button>
+              <div className="mt-4 text-center text-sm">
+                Máte zaregistrovaný účet?{" "}
+                <Link href="/login" className="underline underline-offset-4">
+                  Prihláste sa
+                </Link>
+              </div>
             </div>
           </form>
         </CardContent>
