@@ -10,7 +10,7 @@ type ButtonProps = {
 const SubmitButton = ({ title, className }: ButtonProps) => {
   const { pending } = useFormStatus();
   return (
-    <Button disabled={pending} type="submit">
+    <Button className={className} disabled={pending} type="submit">
       {pending ? <LoadingSpinner /> : title}
     </Button>
   );
