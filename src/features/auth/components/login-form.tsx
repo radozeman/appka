@@ -25,6 +25,7 @@ import { z } from "zod";
 import { useFormState } from "react-dom";
 import { signIn } from "../actions";
 import { useRef } from "react";
+import SubmitButton from "@/components/ui/submit-button";
 
 export function LoginForm({
   className,
@@ -99,9 +100,7 @@ export function LoginForm({
                     </ul>
                   </div>
                 )}
-                <Button type="submit" className="w-full mb-2">
-                  Prihlásiť sa
-                </Button>
+                <SubmitButton title="Prihlásiť sa" />
                 <div className="mt-4 text-center text-sm">
                   Máte zaregistrovaný účet?{" "}
                   <Link href="/login" className="underline underline-offset-4">
