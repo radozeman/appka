@@ -102,9 +102,12 @@ export function LoginForm({
                 )}
                 <SubmitButton title="Prihlásiť sa" />
                 <div className="mt-4 text-center text-sm">
-                  Máte zaregistrovaný účet?{" "}
-                  <Link href="/login" className="underline underline-offset-4">
-                    Prihláste sa
+                  Nemáte zaregistrovaný účet?{" "}
+                  <Link
+                    href="/register"
+                    className="underline underline-offset-4"
+                  >
+                    Zaregistrujte sa
                   </Link>
                 </div>
               </div>
