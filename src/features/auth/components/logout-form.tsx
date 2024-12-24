@@ -1,9 +1,13 @@
+import { Button } from "@/components/ui/button";
 import { signOut } from "../actions";
+import { LogOutIcon } from "lucide-react";
 
 const LogoutForm = () => {
   return (
     <form action={signOut}>
-      <button type="submit">Sign Out</button>
+      <Button type="submit" variant="ghost" size="icon">
+        <LogOutIcon />
+      </Button>
     </form>
   );
 };
