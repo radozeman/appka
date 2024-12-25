@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 const MobileNavigation = () => {
   const pathName = usePathname();
   return (
-    <div className="flex w-full justify-evenly items-center">
+    <div className="flex w-full justify-between items-center">
       {navigationConfig.map(({ href, Icon }, index) => {
         if (href === "/create") {
           return (

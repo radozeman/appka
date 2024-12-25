@@ -7,8 +7,10 @@ const Page = async () => {
   if (!session) redirect("/login");
   const data = true;
   return (
-    <div className="w-full h-full flex items-center justify-center">
-      {data && <NoData />}
+    <div className="w-full h-full">
+      <div className="flex items-center justify-center">
+        {data && <NoData />}
+      </div>
     </div>
   );
 };
