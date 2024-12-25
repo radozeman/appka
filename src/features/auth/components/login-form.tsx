@@ -23,7 +23,6 @@ import { singInSchema } from "../formSchemas";
 import { z } from "zod";
 import { useFormState } from "react-dom";
 import { signIn } from "../actions";
-import { useRef } from "react";
 import SubmitButton from "@/components/ui/submit-button";
 
 export function LoginForm({
@@ -31,7 +30,6 @@ export function LoginForm({
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
   const [formState, action] = useFormState(signIn, { message: "" });
-  const formRef = useRef<HTMLFormElement>(null);
   const form = useForm<z.infer<typeof singInSchema>>({
     resolver: zodResolver(singInSchema),
     defaultValues: {
@@ -41,7 +39,11 @@ export function LoginForm({
     },
   });
 
-  console.log(formState);
+  const handleSubmit = async (formData: FormData) => {
+    form.trigger();
+    await action(formData);
+  };
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -53,11 +55,7 @@ export function LoginForm({
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form
-              ref={formRef}
-              action={action}
-              onSubmit={form.handleSubmit(() => formRef.current?.submit())}
-            >
+            <form action={handleSubmit}>
               <div className="flex flex-col gap-4">
                 <FormField
                   control={form.control}
@@ -99,7 +97,10 @@ export function LoginForm({
                     </ul>
                   </div>
                 )}
-                <SubmitButton title="Prihlásiť sa" />
+                <SubmitButton
+                  title="Prihlásiť sa"
+                  isSubmitting={form.formState.isSubmitting}
+                />
                 <div className="mt-4 text-center text-sm">
                   Nemáte zaregistrovaný účet?{" "}
                   <Link

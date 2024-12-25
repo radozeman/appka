@@ -36,7 +36,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <NextTopLoader />
+          <NextTopLoader color="#e11d48" showSpinner={false} height={2} />
           {children}
         </ThemeProvider>
       </body>

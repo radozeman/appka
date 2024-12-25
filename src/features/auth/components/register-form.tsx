@@ -23,7 +23,6 @@ import { signUpSchema } from "../formSchemas";
 import { z } from "zod";
 import { useFormState } from "react-dom";
 import { signUp } from "../actions";
-import { useRef } from "react";
 import SubmitButton from "@/components/ui/submit-button";
 
 export function RegisterForm({
@@ -31,7 +30,6 @@ export function RegisterForm({
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
   const [formState, action] = useFormState(signUp, { message: "" });
-  const formRef = useRef<HTMLFormElement>(null);
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -42,7 +40,11 @@ export function RegisterForm({
     },
   });
 
-  console.log(formState);
+  const handleSubmit = async (formData: FormData) => {
+    form.trigger();
+    await action(formData);
+  };
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -54,11 +56,7 @@ export function RegisterForm({
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form
-              ref={formRef}
-              action={action}
-              onSubmit={form.handleSubmit(() => formRef.current?.submit())}
-            >
+            <form action={handleSubmit}>
               <div className="flex flex-col gap-4">
                 <FormField
                   control={form.control}
@@ -113,7 +111,10 @@ export function RegisterForm({
                     </ul>
                   </div>
                 )}
-                <SubmitButton title=" Zaregistrovať sa" />
+                <SubmitButton
+                  title=" Zaregistrovať sa"
+                  isSubmitting={form.formState.isSubmitting}
+                />
                 <div className="mt-4 text-center text-sm">
                   Máte zaregistrovaný účet?{" "}
                   <Link href="/login" className="underline underline-offset-4">

@@ -5,7 +5,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <main className="w-full p-2.5 h-screen flex flex-col justify-between">
       <Topbar />
-      <div className="grow">{children}</div>
+      <div className="grow overflow-y-scroll">{children}</div>
       <BottomBar />
     </main>
   );
