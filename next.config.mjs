@@ -1,4 +1,13 @@
+import withSerwistInit from "@serwist/next";
+
 /** @type {import('next').NextConfig} */
+
+const withSerwist = withSerwistInit({
+  swSrc: "app/sw.ts",
+  swDest: "public/sw.js",
+  cacheOnNavigation: true,
+});
+
 const nextConfig = {
   webpack: (config, { isServer }) => {
     if (isServer) {
@@ -14,4 +23,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withSerwist(nextConfig);
